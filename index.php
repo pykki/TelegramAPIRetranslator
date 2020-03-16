@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 ini_set('allow_url_fopen', true);
 
-file_get_contents('https://api.telegram.org/bot297476263:AAGFSVuFFRO2vFOMPPQmcdh7ggr2Tlin5Mk/getMe');
+exit(file_get_contents('https://api.telegram.org/bot297476263:AAGFSVuFFRO2vFOMPPQmcdh7ggr2Tlin5Mk/getMe'));
 die;
 
 define('DEBUG', false);
