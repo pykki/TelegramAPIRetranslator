@@ -5,9 +5,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 ini_set('allow_url_fopen', true);
 
-exit(file_get_contents('https://api.telegram.org/bot297476263:AAGFSVuFFRO2vFOMPPQmcdh7ggr2Tlin5Mk/getMe'));
-die;
-
 define('DEBUG', false);
 define('WEBHOOK_URL', 'https://verytec.ru/telegramm/webhook.php');
 define('CLIENT_IPS',['81.177.6.70','217.107.34.136','217.107.219.24','217.107.219.174','217.107.219.218']);
