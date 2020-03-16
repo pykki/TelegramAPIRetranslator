@@ -7,7 +7,7 @@ ini_set('allow_url_fopen', true);
 
 define('DEBUG', false);
 define('WEBHOOK_URL', 'https://verytec.ru/telegramm/webhook.php');
-define('CLIENT_IPS',['81.177.6.70','217.107.34.136','217.107.219.24','217.107.219.174','217.107.219.218']);
+define('CLIENT_IPS',['81.177.6.70','217.107.34.136','217.107.219.24','217.107.219.174','217.107.219.218']); // not working in GoogleCloud
 define('CLIENT_KEY','GoogleCloudVerytec');
 
 if(!$content = file_get_contents('php://input'))
@@ -24,7 +24,10 @@ if((!empty(CLIENT_KEY) && CLIENT_KEY==@$r['remote_key']) || in_array($_SERVER['R
         get_error('api_url is empty');
 
 	define('API_URL', $r['api_url']);
-	@unset($r['api_url'],$r['remote_key']);
+	unset($r['api_url']);
+
+	if(isset($r['remote_key']))
+		unset($r['remote_key']);
 
     // /[method] (simple manual requests)
 	if(current($r)==''){
