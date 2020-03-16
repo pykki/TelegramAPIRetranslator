@@ -71,6 +71,7 @@ function api_request_send($method,$parameters=[],$api_url){
 		get_error('Parameters must be an array');
 
 	$url = $api_url.$method.($parameters?'?'.http_build_query($parameters):'');
+	var_dump($url);
 
 	if(DEBUG)
 		exit('Fake get data from: '.$url);
