@@ -8,6 +8,7 @@ ini_set('allow_url_fopen', true);
 define('DEBUG', false);
 define('WEBHOOK_URL', 'https://verytec.ru/telegramm/webhook.php');
 define('CLIENT_IPS',['81.177.6.70','217.107.34.136','217.107.219.24','217.107.219.174','217.107.219.218']);
+define('CLIENT_KEY','GoogleCloudVerytec');
 
 if(!$content = file_get_contents('php://input'))
 	get_error('no input');
@@ -17,14 +18,13 @@ if(!$r = json_decode($content, true))
 if(DEBUG)
 	echo '<pre>Debug is ON'.PHP_EOL.'Client IP: '.$_SERVER['REMOTE_ADDR'].PHP_EOL.print_r($r,1).PHP_EOL;
 
-var_dump($_SERVER['REMOTE_ADDR']);
 // Reseave commands from Webhook IP's
-if(in_array($_SERVER['REMOTE_ADDR'],CLIENT_IPS)){
+if((!empty(CLIENT_KEY) && CLIENT_KEY==@$r['remote_key']) || in_array($_SERVER['REMOTE_ADDR'],CLIENT_IPS)){
 	if(empty($r['api_url']))
         get_error('api_url is empty');
 
 	define('API_URL', $r['api_url']);
-	unset($r['api_url']);
+	@unset($r['api_url'],$r['remote_key']);
 
     // /[method] (simple manual requests)
 	if(current($r)==''){
@@ -71,8 +71,7 @@ function api_request_send($method,$parameters=[],$api_url){
 	if(!is_array($parameters))
 		get_error('Parameters must be an array');
 
-	$url = $api_url.$method.($parameters?'?'.http_build_query($parameters):'');
-	var_dump($url);
+	$url = $api_url.$method.($parameters?'?'.http_build_query($parameters):''); var_dump($url);
 
 	if(DEBUG)
 		exit('Fake get data from: '.$url);
