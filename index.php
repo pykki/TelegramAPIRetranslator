@@ -17,6 +17,7 @@ if(!$r = json_decode($content, true))
 if(DEBUG)
 	echo '<pre>Debug is ON'.PHP_EOL.'Client IP: '.$_SERVER['REMOTE_ADDR'].PHP_EOL.print_r($r,1).PHP_EOL;
 
+var_dump($_SERVER['REMOTE_ADDR']);
 // Reseave commands from Webhook IP's
 if(in_array($_SERVER['REMOTE_ADDR'],CLIENT_IPS)){
 	if(empty($r['api_url']))
