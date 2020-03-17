@@ -6,14 +6,12 @@ ini_set('display_startup_errors', 1);
 ini_set('allow_url_fopen', true);
 
 define('DEBUG', false);
-define('WEBHOOK_URL', 'https://verytec.ru/telegramm/webhook.php');
-define('CLIENT_IPS',['81.177.6.70','217.107.34.136','217.107.219.24','217.107.219.174','217.107.219.218']); // not working in GoogleCloud
-define('CLIENT_KEY','GoogleCloudVerytec');
+define('WEBHOOK_URL', 'https://[your_site]/webhook.php');
+define('CLIENT_IPS',['ip1','ip2']); // not working in GoogleCloud
+define('CLIENT_KEY','[secret_key]');
 
 if(!$content = file_get_contents('php://input'))
 	get_error('no input');
-//$content = '{"update_id":879273694,
-//"message":{"message_id":642,"from":{"id":83807110,"is_bot":false,"first_name":"drklord","username":"drklord","language_code":"ru"},"chat":{"id":83807110,"first_name":"drklord","username":"drklord","type":"private"},"date":1584423226,"text":"888"}}';
 if(!$r = json_decode($content, true))
  	get_error('json_decode('.$content.') is empty');
 
