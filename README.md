@@ -5,17 +5,19 @@ App Engine for PHP 7.2.
 
 View the [full tutorial](https://cloud.google.com/appengine/docs/standard/php7/quickstart)
 
-Install to GoogleCloud APP Engine:
+#Install to GoogleCloud APP Engine:
 
-# for view existing files
+For view existing files
 	ls a
-# if already exists
+If already exists
 	rm -fR TelegramAPIRetranslator
-git clone https://github.com/pykki/TelegramAPIRetranslator
-cd TelegramAPIRetranslator
-# add your WEBHOOK_URL and CLIENT_KEY to index.php
-# for testing run
+	
+	git clone https://github.com/pykki/TelegramAPIRetranslator
+	cd TelegramAPIRetranslator
+Add your WEBHOOK_URL and CLIENT_KEY to index.php
+For testing run
 	php -S localhost:8080
-# for first install
+For first install
 	gcloud app create
-gcloud app deploy
+
+	gcloud app deploy
