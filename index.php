@@ -12,6 +12,8 @@ define('CLIENT_KEY','GoogleCloudVerytec');
 
 if(!$content = file_get_contents('php://input'))
 	get_error('no input');
+//$content = '{"update_id":879273694,
+//"message":{"message_id":642,"from":{"id":83807110,"is_bot":false,"first_name":"drklord","username":"drklord","language_code":"ru"},"chat":{"id":83807110,"first_name":"drklord","username":"drklord","type":"private"},"date":1584423226,"text":"888"}}';
 if(!$r = json_decode($content, true))
  	get_error('json_decode('.$content.') is empty');
 
@@ -21,7 +23,7 @@ if(DEBUG)
 // Reseave commands from Webhook IP's
 if((!empty(CLIENT_KEY) && CLIENT_KEY==@$r['remote_key']) || in_array($_SERVER['REMOTE_ADDR'],CLIENT_IPS)){
 	if(empty($r['api_url']))
-        get_error('api_url is empty');
+		get_error('api_url is empty');
 
 	define('API_URL', $r['api_url']);
 	unset($r['api_url']);
@@ -29,27 +31,25 @@ if((!empty(CLIENT_KEY) && CLIENT_KEY==@$r['remote_key']) || in_array($_SERVER['R
 	if(isset($r['remote_key']))
 		unset($r['remote_key']);
 
-    // /[method] (simple manual requests)
+	// /[method] (simple manual requests)
 	if(current($r)==''){
 		$method = key($r);
 		array_shift($r);
-        	api_request_send($method, $r, API_URL);
+		api_request_send($method, $r, API_URL);
 	}
 	// classic request
 	elseif(isset($r['method'])){
-        	$method = key($r['method']);
-		unset($r['method']);
-        	api_request_send($method, $r, API_URL);
+		send_data(json_encode($r),API_URL);
 	}
 	/*
 	// For alternative post data; Set or delete webhook, url = '' or [WEBHOOK_URL]
-	if(isset($r['request']['name'])){
+	elseif(isset($r['request']['name'])){
 		if($r['request']['name']=='setWebhook'){
 			if(isset($r['request']['value']))
 				api_request_send('setWebhook', ['url' => $r['request']['value']], API_URL);
 		}
 		else
-            api_request_send($r['request']['name'], $r['request']['value']??[], API_URL);
+			api_request_send($r['request']['name'], $r['request']['value']??[], API_URL);
 	}
 	*/
 	exit('{"result":false,"error":"end request section"}');
@@ -89,7 +89,7 @@ function api_request_send($method,$parameters=[],$api_url){
 
 	// Alternative POST data
 	$parameters['method'] = $method;
-    send_data($parameters,$api_url.$method);
+	send_data($parameters,$api_url.$method);
 }
 
 function get_error($string){
@@ -102,11 +102,11 @@ function send_data($content,$url=false){
 	if(DEBUG)
 		exit('Fake send data: '.print_r($content,1).' to: '.$url);
 
-    $options = [
-    	'http' => [
-        	'header'  => "Content-type: application/json\r\n",
-        	'method'  => 'POST',
-        	'content' => $content
+	$options = [
+		'http' => [
+			'header'  => "Content-type: application/json\r\n",
+			'method'  => 'POST',
+			'content' => $content
 		]
 	];
 	$context  = stream_context_create($options);
