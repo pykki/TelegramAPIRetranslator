@@ -33,7 +33,13 @@ if((!empty(CLIENT_KEY) && CLIENT_KEY==@$r['remote_key']) || in_array($_SERVER['R
 	if(current($r)==''){
 		$method = key($r);
 		array_shift($r);
-        api_request_send($method, $r, API_URL);
+        	api_request_send($method, $r, API_URL);
+	}
+	// classic request
+	elseif(isset($r['method'])){
+        	$method = key($r['method']);
+		unset($r['method']);
+        	api_request_send($method, $r, API_URL);
 	}
 	/*
 	// For alternative post data; Set or delete webhook, url = '' or [WEBHOOK_URL]
