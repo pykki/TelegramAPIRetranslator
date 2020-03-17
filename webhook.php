@@ -17,7 +17,7 @@ define('DEBUG', false);
 define('BOT_TOKEN', '[bot_token]');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
 define('WEBHOOK_URL', 'https://[your_site]/webhook.php');
-define('RETRANSLATOR_URL', 'https://[your_retranslator].appspot.com'); // empty if none
+define('RETRANSLATOR_URL', 'https://[project_name].appspot.com'); // empty if none
 define('REMOTE_CONTROL', !false); // controlls with GET commands for testing
 define('REMOTE_KEY', '[secret_key]'); // if Retranslator use it
 
