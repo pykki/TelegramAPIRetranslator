@@ -1,4 +1,5 @@
 # Telegram API retranslator for PHP 7.2
+(if host-provider blocked Telegram servers)
 
 This sample demonstrates how to deploy a *very* basic application to Google
 App Engine for PHP 7.2.
